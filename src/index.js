@@ -3,15 +3,14 @@ import ReactDOM from 'react-dom';
 import App from './App.jsx';
 import './index.css';
 import FacebookGithubService from './facebook-github-service/facebook-github.service';
-import store from './store';
 
 async function init(){
   const service = new FacebookGithubService();
   const repos = await service.listRepositories();
-  store.repos = [...repos];
+  const last20Commits = await service.getLast20CommitsFromRepo('react');
 
   ReactDOM.render(
-    <App repos={store.repos}/>,
+    <App repos={repos} commits={last20Commits}/>,
     document.getElementById('root')
   );
 }
