@@ -17,7 +17,7 @@ describe('Facebook Github Service', () => {
 
     describe('When listing the commits from a given repository', () => {
         
-        it('should return the last 20 returned commits', async () => {
+        it('should return the last 20', async () => {
             const service = new FacebookGithubService();
             const returnedCommits = [...Array(30).keys()];
             const expectedCommits = [...returnedCommits.slice(0, 20)]
