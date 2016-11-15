@@ -1,6 +1,6 @@
 # React Demo App
 
-This is a React-Mobx demo app that connects to the github to retreive the public repositories of `facebook` user and their commits.
+This is a React-Mobx demo app that connects to the facebook github account and shows all public repositories with their commits.
 
 # Run
 
