@@ -11,7 +11,7 @@ class App extends Component {
     return (
       <MuiThemeProvider>
           <div>
-            <AppBar title="Facebook Repositories Explorer" iconClassNameRight="muidocs-icon-navigation-expand-more"/>
+            <AppBar title="Facebook Repositories Explorer"/>
             <div className='App'>
               <RepositoryList/>
               <CommitsList/>              
