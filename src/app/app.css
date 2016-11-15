@@ -2,16 +2,24 @@
   display: flex;
 }
 
-.App-leftBar {  
-  margin-right: 20px;
-  min-width: 500px;
-  position: relative;
-  margin-top: 10px;
+.App-leftBar {
+  margin: 5px;
+  width: 40%;  
+  position: fixed;
+  top: 80px;
+  overflow-y: auto;
+  bottom: 0;
 }
 
 .App-rightBar {
+  position: fixed;
+  top: 80px;
   flex-grow: 1;
-  margin-top: 10px; 
+  left: 40%;
+  margin: 5px 5px 5px 20px;
+  width: 58%;
+  overflow-y: auto;
+  bottom: 0;
 }
 
 .Feature {

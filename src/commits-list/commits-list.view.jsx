@@ -1,34 +1,28 @@
 import React, { Component } from 'react';
-import {List, ListItem} from 'material-ui/List';
-import Avatar from 'material-ui/Avatar';
-import moment from 'moment';
+import {List} from 'material-ui/List';
+import Subheader from 'material-ui/Subheader';
 import { connect } from 'mobx-connect';
+import TextField from 'material-ui/TextField';
+import Paper from 'material-ui/Paper';
+import CommitItem from '../commit-item/commit-item.view.jsx';
 
 class CommitsList extends Component {
     render() {
-        const {commits} = this.context.store;
+        const {store, store: {commits, showLatest20Commits}} = this.context;
+        const subHeaderText = showLatest20Commits ? 'Latest 20 commits' : `${commits.length} search results`;
         return (
-            <List>
-                { commits.map(commit => { 
-                    const {sha, message, date, avatar_url, login} = this.getInfoFromCommit(commit);
-                    return (
-                        <ListItem 
-                            key={sha}
-                            leftAvatar={<Avatar src={avatar_url} />}
-                            primaryText={message}
-                            secondaryText={`${login} commited ${moment(date).fromNow()}`}
-                        />);
-                    }
-                )}                                                    
-            </List>
+            <Paper className='App-rightBar' zDepth={1}>
+                <TextField 
+                    hintText="Type to search for commits"
+                    fullWidth={true}
+                    onChange={(event) => store.setFilter(event.target.value)}                     
+                />
+                <List>
+                    <Subheader>{subHeaderText}</Subheader>
+                    { commits.map(commit => <CommitItem key={commit.sha} commit={commit}/>) }                                                                        
+                </List>
+            </Paper>
         );
-    }
-
-    getInfoFromCommit(commit) {
-        const {sha, commit: {message, author: {date}}, author} = commit;
-        const guarded_author = author || { login: 'unknown' };
-        const {avatar_url, login} = guarded_author;
-        return {sha, message, date, avatar_url, login};
     }
 }
 
