@@ -34,18 +34,21 @@ export default class Store {
             return;
         }
         
-        facebookGithubService.getCommitsFromRepo(repoName)
-            .then(commits =>  { 
-                this.commitsByRepo = {
-                    ...this.commitsByRepo, 
-                    [repoName]: commits 
-                }; 
-            });        
+        this._loadCommits(repoName);
     }
 
-    loadRepos() {
-        facebookGithubService.listRepositories()
-            .then(repos => { this.repos = repos });
+    async _loadCommits(repoName) {
+        
+        const commits = await facebookGithubService.getCommitsFromRepo(repoName);
+        this.commitsByRepo = {
+            ...this.commitsByRepo, 
+            [repoName]: commits 
+        };
+    }
+
+    async loadRepos() {
+        const repos = await facebookGithubService.listRepositories();
+        this.repos = repos;
     }
 
     filterRepos(name, index) {
